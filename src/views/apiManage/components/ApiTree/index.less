@@ -1,4 +1,26 @@
 .api-tree_arrow{
   cursor: pointer;
   font-size: 14px;
+  margin-right: 6px;
+}
+.api-tree_folder{
+  margin-right: 5px;
+}
+
+.api-group{
+  .api-group_item{
+    .api-group_name{
+      cursor: pointer;
+    }
+    .api-group_list{
+      padding-left: 30px;
+      .api-item{
+        padding: 4px 8px;
+        cursor: pointer;
+        &.activted{
+          background-color: #d8eafe;
+        }
+      }
+    }
+  }
 }

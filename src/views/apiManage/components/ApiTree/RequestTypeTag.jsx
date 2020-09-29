@@ -1,10 +1,11 @@
 import { defineComponent, reactive } from 'vue'
+import './RequestTypeTag.less'
 
 const requestType = {
-  post: { color: 'red' },
-  get: '',
-  delete: '',
-  put: ''
+  post: { color: 'blue' },
+  get: { color: 'green' },
+  delete: { color: 'red' },
+  put: { color: 'orange' }
 }
 
 const RequestTypeTag = defineComponent({
@@ -15,7 +16,11 @@ const RequestTypeTag = defineComponent({
     const state = reactive({
       type: props.type
     })
-    return () => <a-tag color={requestType[state.type].color}>{state.type.toUpperCase()}</a-tag>
+    return () => (
+      <a-tag class="type-tag" color={requestType[state.type].color}>
+        {state.type.toUpperCase()}
+      </a-tag>
+    )
   }
 })
 export default RequestTypeTag
