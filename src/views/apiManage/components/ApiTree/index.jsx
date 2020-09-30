@@ -3,7 +3,16 @@ import { CaretDownOutlined, FolderOutlined, CaretRightOutlined, FolderOpenOutlin
 import RequestTypeTag from './RequestTypeTag'
 import './index.less'
 
-const treeData = [{ name: '项目一测试接口', expend: true }]
+const treeData = [
+  {
+    name: '项目一测试接口',
+    expend: true,
+    children: [
+      { name: '用户登陆', type: 'post' },
+      { name: '获取用户状态', type: 'get' }
+    ]
+  }
+]
 
 const ApiTree = defineComponent({
   setup() {
@@ -40,10 +49,14 @@ const ApiTree = defineComponent({
                 </div>
                 {item.expend ? (
                   <ul class="api-group_list">
-                    <li class="api-item">
-                      <RequestTypeTag type="post" />
-                      获取用户状态
-                    </li>
+                    {item.children.map(_item => {
+                      return (
+                        <li class="api-item">
+                          <RequestTypeTag type={_item.type} />
+                          {_item.name}
+                        </li>
+                      )
+                    })}
                   </ul>
                 ) : null}
               </li>
