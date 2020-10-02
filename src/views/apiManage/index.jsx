@@ -3,6 +3,7 @@ import ApiTree from './components/ApiTree/index'
 import ApiFilterForm from './components/ApiFilterForm/index'
 import RequestTypeTag from './components/ApiTree/RequestTypeTag'
 import CopyIcon from '../../components/icon/copy'
+import MockList from './components/MockList'
 import './index.less'
 
 const Index = defineComponent({
@@ -61,7 +62,9 @@ const Index = defineComponent({
                 <div class="tab-content">预览</div>
               </a-tab-pane>
               <a-tab-pane key="3" tab="运行">
-                <div class="tab-content">预览</div>
+                <div class="tab-content">
+                  <MockList />
+                </div>
               </a-tab-pane>
             </a-tabs>
           </div>
