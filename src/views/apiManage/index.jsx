@@ -4,6 +4,7 @@ import ApiFilterForm from './components/ApiFilterForm/index'
 import RequestTypeTag from './components/ApiTree/RequestTypeTag'
 import CopyIcon from '../../components/icon/copy'
 import MockList from './components/MockList'
+import AceEditor from '../../components/AceEditor/AceEditor'
 import './index.less'
 
 const Index = defineComponent({
@@ -54,7 +55,10 @@ const Index = defineComponent({
                       <span>此间少年9</span>
                     </div>
                   </div>
-                  <div>请求参数</div>
+                  <div>
+                    <div>请求参数</div>
+                    <AceEditor style={{ minHeight: '200px' }} />
+                  </div>
                   <div>返回参数</div>
                 </div>
               </a-tab-pane>
