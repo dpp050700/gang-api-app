@@ -1,31 +1,31 @@
 import { defineComponent, Fragment, reactive } from 'vue'
 import { CaretDownOutlined, FolderOutlined, CaretRightOutlined, FolderOpenOutlined } from '@ant-design/icons-vue'
 import RequestTypeTag from './RequestTypeTag'
+import apiList from '../../../../mock/apiList'
 import './index.less'
 
-const treeData = [
-  {
-    name: '项目一测试接口',
-    expend: true,
-    children: [
-      { name: '用户登陆', type: 'post' },
-      { name: '获取用户状态', type: 'get' }
-    ]
-  }
-]
-
 const ApiTree = defineComponent({
-  setup() {
+  props: {
+    onClick: {
+      type: Function
+    }
+  },
+  setup(props) {
     const state = reactive({
-      treeData
+      apiList
     })
     const expend = item => {
       item.expend = !item.expend
     }
+    const clickApi = data => {
+      props.onClick(data)
+      console.log(data)
+    }
     return () => {
+      console.log(this)
       return (
         <ul class="api-group">
-          {state.treeData.map(item => {
+          {state.apiList.map(item => {
             return (
               <li class="api-group_item">
                 <div
@@ -51,7 +51,12 @@ const ApiTree = defineComponent({
                   <ul class="api-group_list">
                     {item.children.map(_item => {
                       return (
-                        <li class="api-item">
+                        <li
+                          class="api-item"
+                          onClick={() => {
+                            clickApi(_item)
+                          }}
+                        >
                           <RequestTypeTag type={_item.type} />
                           {_item.name}
                         </li>

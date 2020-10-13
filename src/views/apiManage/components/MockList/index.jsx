@@ -1,73 +1,61 @@
 const { defineComponent, reactive } = require('vue')
+import { BugOutlined } from '@ant-design/icons-vue'
+import LoginMock from '@/mock/login.js'
+import http from '@/plugin/http/index'
 
 const MockList = defineComponent({
-  setup() {
+  props: {
+    apiDetail: {
+      type: Object
+    }
+  },
+  setup(props) {
+    const handleRequest = data => {
+      http[props.apiDetail.type](props.apiDetail.url, data.record.reqBody).then(data => {
+        console.log(data)
+      })
+    }
     const state = reactive({
-      data: [
-        {
-          key: '1',
-          name: 'John Brown111',
-          age: 32,
-          address: 'New York No. 1 Lake Park, New York No. 1 Lake Park',
-          tags: ['nice', 'developer']
-        },
-        {
-          key: '2',
-          name: 'Jim Green',
-          age: 42,
-          address: 'London No. 2 Lake Park, London No. 2 Lake Park',
-          tags: ['loser']
-        },
-        {
-          key: '3',
-          name: 'Joe Black',
-          age: 32,
-          address: 'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-          tags: ['cool', 'teacher']
-        }
-      ],
+      data: LoginMock,
       columns: [
         {
-          title: '标题',
+          title: 'Mock 标题',
           dataIndex: 'name',
           key: 'name'
         },
         {
           title: '请求参数',
-          dataIndex: 'age',
-          key: 'age',
-          width: 80
+          dataIndex: 'reqBody',
+          key: 'reqBody',
+          width: 180
         },
         {
-          title: '返回参数',
-          dataIndex: 'address',
-          key: 'address 1',
-          ellipsis: true
-        },
-        {
-          title: '创建日期',
-          dataIndex: 'address',
-          key: 'address 2',
+          title: 'Mock 返回',
+          dataIndex: 'resBody',
+          key: 'rsqBody',
           ellipsis: true
         },
         {
           title: '操作',
           dataIndex: 'operation',
           key: 'operation',
-          scopedSlots: { customRender: 'operation' }
+          customRender: data => (
+            <a-button
+              type="primary"
+              onClick={() => {
+                handleRequest(data)
+              }}
+            >
+              <BugOutlined />
+            </a-button>
+          )
         }
       ]
     })
     return () => (
-      <a-table
-        columns={state.columns}
-        data-source={state.data}
-        scopedSlots={{
-          operation: () => {
-            return 'action'
-          }
-        }}
-      ></a-table>
+      <a-table columns={state.columns} data-source={state.data}>
+        <template name="operation">1112</template>
+      </a-table>
     )
   }
 })

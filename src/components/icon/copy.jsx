@@ -6,7 +6,6 @@ export default defineComponent({
     value: String
   },
   setup(props) {
-    console.log(props)
     const copy = () => {
       let transfer = document.createElement('input')
       document.body.appendChild(transfer)
