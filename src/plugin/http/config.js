@@ -14,4 +14,10 @@ const baseConfig = {
   retryInterval: 2000 // todo
 }
 
+export const storageKey = {
+  token: '_api_tk',
+  uid: '_api_uid',
+  tenantid: '_api_tenantid'
+}
+
 export default baseConfig

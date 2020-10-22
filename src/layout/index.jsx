@@ -3,11 +3,11 @@ import './index.less'
 import Logo from '../components/icon/logo'
 import { BugOutlined, SettingOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
-function LogoContainer(props) {
+function LogoContainer() {
   return (
-    <div class="layout-sider_logo" class={props.collapsed ? 'logo_collapsed' : ''}>
+    <div class="layout-header_logo">
       <Logo />
-      {props.collapsed ? null : 'Api'}
+      FullStopApi
     </div>
   )
 }
@@ -24,26 +24,26 @@ const LayoutApp = defineComponent({
 
     return () => (
       <a-layout class="layout-container">
-        <a-layout-sider class="layout-sider" collapsed={state.collapsed} trigger={null} collapsible>
+        <a-layout-header class="layout-header">
           <LogoContainer collapsed={state.collapsed} />
-          <div class="layout-sider_content">
-            <a-menu theme="dark" mode="inline">
-              <a-menu-item key="1">
-                <BugOutlined />
-                <span class="nav-text">接口管理</span>
-              </a-menu-item>
-              <a-menu-item key="2">
-                <SettingOutlined />
-                <span class="nav-text">配置管理</span>
-              </a-menu-item>
-            </a-menu>
-          </div>
-          <div class="layout-sider_footer"></div>
-        </a-layout-sider>
-        <a-layout>
-          <a-layout-header class="layout-header">
-            {state.collapsed ? <MenuUnfoldOutlined onClick={toggle} /> : <MenuFoldOutlined onClick={toggle} />}
-          </a-layout-header>
+          {state.collapsed ? <MenuUnfoldOutlined onClick={toggle} /> : <MenuFoldOutlined onClick={toggle} />}
+        </a-layout-header>
+        <a-layout class="layout-body">
+          <a-layout-sider class="layout-sider" collapsed={state.collapsed} trigger={null} collapsible>
+            <div class="layout-sider_content">
+              <a-menu theme="dark" mode="inline">
+                <a-menu-item key="1">
+                  <BugOutlined />
+                  <span class="nav-text">接口管理</span>
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <SettingOutlined />
+                  <span class="nav-text">配置管理</span>
+                </a-menu-item>
+              </a-menu>
+            </div>
+            <div class="layout-sider_footer"></div>
+          </a-layout-sider>
           <a-layout-content class="layout-content">
             <router-view />
           </a-layout-content>

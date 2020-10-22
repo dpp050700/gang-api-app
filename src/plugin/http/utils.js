@@ -1,4 +1,5 @@
-export default function uuid() {
+import { storageKey } from './config'
+export const uuid = () => {
   var s = []
   var hexDigits = '0123456789abcdef'
   for (var i = 0; i < 36; i++) {
@@ -10,4 +11,9 @@ export default function uuid() {
 
   var uuid = s.join('')
   return uuid
+}
+
+export const getLocalStorage = name => {
+  console.log(storageKey)
+  return localStorage.getItem(storageKey[name])
 }

@@ -3,6 +3,8 @@ import baseConfig from './config'
 import { AID } from './contants'
 import callbackList from '@/plugin/callback/index'
 
+import { getLocalStorage } from './utils'
+
 let callback = null
 
 const request = ZGRequest(baseConfig)
@@ -12,9 +14,8 @@ request.interceptor.request.use(request => {
   const body = { ...(request.body || {}) }
   if (request.signature) {
     body._aid = AID
-    body._tk =
-      'FMRY17%2FdFKWGWYCCRn1QX8%2Fn%2FQ%2Bd4F3ZA%2FZurSQutN4aG8L6lFrBPvWSI2NAlq0yNbgV6lT3HHQ1Z8GZXJ6ybOmMWblyj4%2B914Vyf6DkeKzgpmNnsJiHZm2bD8OHBxxTUwWPt7LALZwE8z5NZ1vv9w%3D%3D'
-    body._uid = '1002'
+    body._tk = getLocalStorage('token')
+    body._uid = getLocalStorage('uid')
     body._tenantid = '21'
     body._domid = 2000
     request.body = body

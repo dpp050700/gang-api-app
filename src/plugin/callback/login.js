@@ -1,4 +1,7 @@
+import { storageKey } from '../http/config'
 export default data => {
-  console.log(data)
-  console.log('走到回调里面啦')
+  if (data.success) {
+    localStorage.setItem(storageKey.token, data.data.token)
+    localStorage.setItem(storageKey.uid, data.data.uid)
+  }
 }
